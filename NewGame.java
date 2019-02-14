@@ -24,8 +24,8 @@ while (direction < 4) {
         for (y = 0; y < size; y++) {
             step = 1;
             do
-                reach[direction][(x + (step * dX)) % size][(y + (step * dY)) % size] = step++;
-            while (cell_code[(x + ((step - 1) * dX)) % size][(y + ((step - 1) * dY)) % size] != 'r');
+                reach[direction][((x + (step * dX)) + size) % size][((y + (step * dY)) + size) % size] = step++;
+            while (cell_code[((x + ((step - 1) * dX)) + size) % size][((y + ((step - 1) * dY)) + size) % size] != 'r');
             for (char d : "NSWE".toCharArray()) {
                 switch (d) {
                 case 'N':
@@ -48,11 +48,11 @@ while (direction < 4) {
                             if (reach[direction][(i + (dI * s)) % size][(j + (dJ * s)) % size] == -1
                                 || reach[direction][(i + (dI * s)) % size][(j + (dJ * s)) % size] > step)
                                 do {
-                                    reach[direction][(i + (dI * s)) % size][(j + (dJ * s)) % size] = step;
+                                    reach[direction][((i + (dI * s)) + size) % size][((j + (dJ * s)) + size) % size] = step;
                                     s++;
                                     step++;
-                                } while (reach[direction][(i + dI * s)) % size][(j + (dJ * s)) % size] == -1
-                                    || reach[direction][(i + dI * s)) % size][(j + (dJ * s)) % size] > step - 1);
+                                } while (reach[direction][((i + dI * s)) + size) % size][((j + (dJ * s)) + size) % size] == -1
+                                    || reach[direction][((i + dI * s)) + size) % size][((j + (dJ * s)) + size) % size] > step - 1);
                         }
             }
         }
